@@ -311,6 +311,10 @@ Etapas implementadas e validadas:
 
 As etapas ainda não marcadas fazem parte da evolução do projeto e não foram consideradas implementadas nesta fase.
 
+> **Observação:** O ambiente de Homologação utilizado nesta etapa é uma
+> simulação executada em container Docker no runner do GitHub Actions.
+> Não representa uma infraestrutura externa permanente de Staging.
+
 ---
 
 15. Objetivo Educacional
