@@ -366,6 +366,10 @@ A atividade permitiu aplicar conceitos de:
 - testes E2E;
 - aprovação manual antes da produção.
 
+
+### Otimização do Pipeline
+
+O workflow está configurado para ignorar alterações exclusivas em arquivos de documentação, como `README.md` e arquivos do diretório `docs/`. Dessa forma, alterações que não afetam código, testes ou infraestrutura não executam desnecessariamente toda a esteira de CI/CD.
 ---
 
 ## Autoria
