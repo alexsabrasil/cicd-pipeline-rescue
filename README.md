@@ -306,7 +306,7 @@ Etapas implementadas e validadas:
 - [x] Simulação local de homologação
 - [x] Testes E2E em homologação
 - [x] Pipeline automatizado com GitHub Actions
-- [ ] Gatilho de aprovação manual do QA
+- [x] Gatilho de aprovação manual do QA
 - [ ] Deploy em produção
 
 As etapas ainda não marcadas fazem parte da evolução do projeto e não foram consideradas implementadas nesta fase.
@@ -314,6 +314,38 @@ As etapas ainda não marcadas fazem parte da evolução do projeto e não foram 
 > **Observação:** O ambiente de Homologação utilizado nesta etapa é uma
 > simulação executada em container Docker no runner do GitHub Actions.
 > Não representa uma infraestrutura externa permanente de Staging.
+
+### Gate Manual de Produção
+
+O pipeline utiliza o ambiente protegido `production` do GitHub Actions como mecanismo de controle antes da etapa de Produção.
+
+Após a conclusão com sucesso das etapas de Build, testes unitários, Quality Gate, análise estática, criação da imagem Docker, Homologação e testes E2E, o workflow não prossegue automaticamente para Produção.
+
+O ambiente `production` foi configurado com **Required Reviewers**, fazendo com que o pipeline permaneça no estado de espera até que o responsável pelo QA revise e aprove manualmente a implantação.
+
+Fluxo validado:
+
+```text
+Build, Testes e Lint
+        |
+        v
+Docker Build
+        |
+        v
+Homologação e Testes E2E
+        |
+        v
+Gatilho de Aprovação Manual do QA
+        |
+        v
+Produção
+```
+
+Durante a validação prática, o GitHub Actions interrompeu corretamente o fluxo antes da Produção e apresentou a solicitação de revisão do ambiente production. Após a aprovação manual, o job final foi liberado e o workflow terminou com sucesso.
+
+> **Observação:** Nessa etapa do projeto, o job posterior à aprovação do QA
+> realiza uma **simulação de Deploy em Produção**. Não existe, até o memento,
+> uma infraestrutura externa real de Produção associada ao pipeline.
 
 ---
 
