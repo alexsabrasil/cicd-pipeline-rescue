@@ -7,10 +7,12 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "npm run test:unit",
     "start": "node src/server.js",
     "lint": "eslint src tests",
-    "test:e2e": "jest tests/e2e.test.js --runInBand --coverage=false"
+    "test:e2e": "jest tests/e2e.test.js --runInBand --coverage=false",
+    "build": "node --check src/app.js && node --check src/server.js",
+    "test:unit": "jest tests/app.test.js --coverage --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +21,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "eslint": "^10.9.1",
+    "eslint": "9.39.2",
     "jest": "^30.5.1",
     "supertest": "^7.2.2"
   },

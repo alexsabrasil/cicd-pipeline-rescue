@@ -13,7 +13,9 @@ module.exports = defineConfig([
         module: 'readonly',
         describe: 'readonly',
         it: 'readonly',
-        expect: 'readonly'
+        test: 'readonly',
+        expect: 'readonly',
+        fetch: 'readonly'
       }
     },
     rules: {
