@@ -8,7 +8,7 @@ Além do desenho solicitado na atividade, foi criada uma implementação prátic
 
 ---
 
-## 1. Cenário
+1. Cenário
 
 A TechExpress realiza atualizações manualmente. Nesse processo, um desenvolvedor copia os arquivos, acessa o servidor de produção e executa os scripts manualmente.
 
@@ -24,7 +24,7 @@ A proposta é substituir esse processo por uma esteira CI/CD com validações pr
 
 ---
 
-## 2. Conceitos de CI/CD
+2. Conceitos de CI/CD
 
 ### Continuous Integration - CI
 
@@ -49,7 +49,7 @@ Neste projeto, o modelo adotado segue **Continuous Delivery**, pois existe aprov
 
 ---
 
-## 3. Arquitetura proposta
+3. Arquitetura proposta
 
 O pipeline foi organizado seguindo os princípios de Fail Fast, Quality Gate e validação antes da produção.
 
@@ -82,10 +82,9 @@ Aprovação Manual do QA
       |
       v
 Deploy em Produção
+```
 
----
-
-## 4. Regras do Pipeline
+4. Regras do Pipeline
 
 ### Fail Fast
 
@@ -108,7 +107,7 @@ Depois do deploy em homologação e da execução dos testes E2E, é necessária
 
 ---
 
-## 5. Tecnologias Utilizadas
+5. Tecnologias Utilizadas
 
 - Node.js
 - Express
@@ -122,7 +121,7 @@ Depois do deploy em homologação e da execução dos testes E2E, é necessária
 
 ---
 
-## 6. Estrutura do Projeto
+6. Estrutura do Projeto
 
 ```text
 cicd-pipeline-rescue/
@@ -143,10 +142,9 @@ cicd-pipeline-rescue/
 ├── package.json
 ├── package-lock.json
 └── README.md
+```
 
----
-
-## 7. API de Demonstração
+7. API de Demonstração
 
 Foi criada uma API mínima em Node.js com Express para representar o serviço da TechExpress.
 
@@ -163,10 +161,9 @@ Resposta esperada:
 }
 
 Esse endpoint é utilizado para verificar se a aplicação está disponível durante as etapas de validação.
+```
 
----
-
-## 8. Testes Unitários e Quality Gate
+8. Testes Unitários e Quality Gate
 
 Os testes automatizados foram implementados utilizando **Jest** e **Supertest**.
 
@@ -190,7 +187,7 @@ O resultado supera o **Quality Gate mínimo de 80%** definido para o pipeline.
 
 ---
 
-## 9. Análise Estática de Código
+9. Análise Estática de Código
 
 O ESLint foi configurado para analisar os arquivos presentes nos diretórios `src` e `tests`.
 
@@ -202,7 +199,7 @@ Durante a validação local, a análise foi concluída sem erros.
 
 ---
 
-## 10. Containerização com Docker
+10. Containerização com Docker
 
 Após a aprovação das validações anteriores, a aplicação foi empacotada em uma imagem Docker.
 
@@ -232,7 +229,7 @@ Resposta obtida:
 
 ---
 
-## 11. Deploy em Homologação
+11. Deploy em Homologação
 
 Para representar a etapa de homologação (Staging), foi utilizado um container Docker local executando a aplicação na porta 3001.
 
@@ -253,7 +250,7 @@ Resposta obtida:
 
 ---
 
-## 12. Testes E2E
+12. Testes E2E
 
 Após o deploy em homologação, foi executado um teste End-to-End contra a aplicação em funcionamento.
 
@@ -274,7 +271,7 @@ Essa validação ocorre antes da aprovação manual do QA e do possível deploy 
 
 ---
 
-## 13. Defesa da Arquitetura
+13. Defesa da Arquitetura
 
 ### Build e validações antes da criação da imagem
 
@@ -294,7 +291,7 @@ Essa aprovação funciona como uma barreira de segurança antes do deploy em pro
 
 ---
 
-## 14. Status do Projeto
+14. Status do Projeto
 
 Etapas implementadas e validadas:
 
@@ -316,7 +313,7 @@ As etapas ainda não marcadas fazem parte da evolução do projeto e não foram 
 
 ---
 
-## 15. Objetivo Educacional
+15. Objetivo Educacional
 
 O projeto demonstra, em ambiente controlado, como práticas de CI/CD podem reduzir os riscos associados a processos manuais de implantação.
 
@@ -336,6 +333,8 @@ A atividade permitiu aplicar conceitos de:
 ---
 
 ## Autoria
+
+**AlexsandraSeravat**
 
 Projeto acadêmico desenvolvido durante a formação em **DevOps da FAP - Aponti**.
 
