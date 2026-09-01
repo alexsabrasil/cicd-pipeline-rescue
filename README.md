@@ -305,7 +305,7 @@ Etapas implementadas e validadas:
 - [x] Execução e validação do container
 - [x] Simulação local de homologação
 - [x] Testes E2E em homologação
-- [ ] Pipeline automatizado com GitHub Actions
+- [x] Pipeline automatizado com GitHub Actions
 - [ ] Gatilho de aprovação manual do QA
 - [ ] Deploy em produção
 
