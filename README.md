@@ -307,46 +307,54 @@ Etapas implementadas e validadas:
 - [x] Testes E2E em homologação
 - [x] Pipeline automatizado com GitHub Actions
 - [x] Gatilho de aprovação manual do QA
-- [ ] Deploy em produção
+- [x] Deploy em produção
 
-As etapas ainda não marcadas fazem parte da evolução do projeto e não foram consideradas implementadas nesta fase.
 
 > **Observação:** O ambiente de Homologação utilizado nesta etapa é uma
 > simulação executada em container Docker no runner do GitHub Actions.
 > Não representa uma infraestrutura externa permanente de Staging.
 
-### Gate Manual de Produção
+### Deploy Real em Produção
 
-O pipeline utiliza o ambiente protegido `production` do GitHub Actions como mecanismo de controle antes da etapa de Produção.
+O deploy em Produção é realizado no Render após a aprovação manual do ambiente protegido `production` no GitHub Actions.
 
-Após a conclusão com sucesso das etapas de Build, testes unitários, Quality Gate, análise estática, criação da imagem Docker, Homologação e testes E2E, o workflow não prossegue automaticamente para Produção.
+O Auto-Deploy do Render permanece desativado. Dessa forma, alterações enviadas à branch `main` não são publicadas diretamente em Produção.
 
-O ambiente `production` foi configurado com **Required Reviewers**, fazendo com que o pipeline permaneça no estado de espera até que o responsável pelo QA revise e aprove manualmente a implantação.
+Após Build, testes unitários, Quality Gate, análise estática, Docker Build, Homologação e testes E2E serem concluídos com sucesso, o pipeline aguarda a aprovação manual do QA.
 
-Fluxo validado:
+Somente após essa aprovação, o GitHub Actions utiliza o secret `RENDER_DEPLOY_HOOK_URL` para acionar o Deploy Hook do Render e iniciar a implantação da versão aprovada.
+
+O endpoint `/health` é utilizado para validar a disponibilidade da aplicação em Produção.
+
+Fluxo final:
 
 ```text
+Push
+  |
+  v
 Build, Testes e Lint
-        |
-        v
+  |
+  v
 Docker Build
-        |
-        v
+  |
+  v
 Homologação e Testes E2E
-        |
-        v
-Gatilho de Aprovação Manual do QA
-        |
-        v
-Produção
+  |
+  v
+Aprovação Manual do QA
+  |
+  v
+GitHub Actions
+  |
+  v
+Render Deploy Hook
+  |
+  v
+Deploy em Produção
+  |
+  v
+Health Check /health
 ```
-
-Durante a validação prática, o GitHub Actions interrompeu corretamente o fluxo antes da Produção e apresentou a solicitação de revisão do ambiente production. Após a aprovação manual, o job final foi liberado e o workflow terminou com sucesso.
-
-> **Observação:** Nessa etapa do projeto, o job posterior à aprovação do QA
-> realiza uma **simulação de Deploy em Produção**. Não existe, até o memento,
-> uma infraestrutura externa real de Produção associada ao pipeline.
-
 ---
 
 15. Objetivo Educacional
