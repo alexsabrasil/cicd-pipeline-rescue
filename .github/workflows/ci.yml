@@ -125,7 +125,10 @@ jobs:
           echo "Aprovação manual do QA recebida."
           echo "Deploy em Produção autorizado."
 
-      - name: Simulate production deploy
+      - name: Trigger Render production deploy
         run: |
-          echo "Simulação de Deploy em Produção iniciada."
-          echo "TechExpress pronta para implantação em Produção."
+          curl --fail --show-error --silent \
+            -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          echo
+          echo "Deploy real no Render solicitado com sucesso." 
+
